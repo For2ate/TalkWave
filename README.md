@@ -22,6 +22,7 @@ TakkWave - is a web application for multi-user text communication. The applicati
 - **Language**: TypeScript(JavaScript)
 - **Library**: React
 - **Styles**: CSS Modules, MaterialUI
+- **Design**: FSD(https://feature-sliced.design/)
 - **State**: Redux Toolkit
 - **Routing**: React Router
 

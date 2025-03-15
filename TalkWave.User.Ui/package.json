@@ -1,5 +1,5 @@
 {
-  "name": "TalkWave.UI",
+  "name": "TalkWave.User.Ui",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -10,10 +10,14 @@
   },
   "dependencies": {
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.3.0"
   },
   "devDependencies": {
     "@rsbuild/core": "^1.2.16",
-    "@rsbuild/plugin-react": "^1.1.1"
+    "@rsbuild/plugin-react": "^1.1.1",
+    "@types/react": "^19.0.10",
+    "@types/react-dom": "^19.0.4",
+    "typescript": "^5.8.2"
   }
 }
