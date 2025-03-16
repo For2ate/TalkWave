@@ -6,18 +6,31 @@
 	min-height: 100dvh;
     margin: 0;
     padding:0;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
 }
 
 .container {
-    width: 100%;
+    width: 325px;
     height: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center; 
+}
 
+.container > h1 {
+    color: #fff;
+    margin-bottom: 25px;
 }
 
 .box {
-    width: 50%;
-    height: 100vh;
+    display: flex;
+    width: 90%;
+    flex-direction: column;
+    gap:20px;
+    height: 50vh;
+    font-size: 20px;
 }
 
