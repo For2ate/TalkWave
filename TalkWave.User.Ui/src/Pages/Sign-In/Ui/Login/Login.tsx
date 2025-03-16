@@ -1,6 +1,8 @@
 import { useState } from "react";
 import styles from "./Login.module.css";
 import { StyledButton, StyledInput } from "Shared/Ui";
+import { LoginData } from "Entities/User/SignInModels";
+import { Login } from "Pages/Sign-In/Api/SignIn";
 
 export const LoginPage = () => {
   const [login, setLogin] = useState("");
@@ -13,8 +15,19 @@ export const LoginPage = () => {
   const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setPassword(event.target.value); // update password state
   };
-  const handle = () => {
+  const handleLogin = async () => {
     console.log(`login: ${login} password: ${password}`);
+    const data: LoginData = { login, password };
+    const result = await Login(data);
+    if (result) {
+      localStorage[`userId`] = result.id;
+      localStorage[`userFirstName`] = result.firstname;
+      localStorage[`userLastName`] = result.lastname;
+      localStorage[`userEmail`] = result.email;
+    } else {
+      // login error
+      console.error("Login failed:", result);
+    }
   };
 
   return (
@@ -35,7 +48,7 @@ export const LoginPage = () => {
               onChange={handlePasswordChange}
               value={password}
             />
-            <StyledButton onClick={handle}>
+            <StyledButton onClick={handleLogin}>
               <p>Login</p>
             </StyledButton>
           </div>
