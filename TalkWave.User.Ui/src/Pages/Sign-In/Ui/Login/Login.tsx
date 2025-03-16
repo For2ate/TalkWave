@@ -18,18 +18,20 @@ export const LoginPage = () => {
     <>
       <div className={styles.layout}>
         <main className={styles.container}>
-          <StyledInput
-            label="Login"
-            type="input"
-            onChange={handleLoginChange}
-            value={login}
-          />
-          <StyledInput
-            label="Password"
-            type="password"
-            onChange={handlePasswordChange}
-            value={password}
-          />
+          <div className={styles.box}>
+            <StyledInput
+              label="Login"
+              type="input"
+              onChange={handleLoginChange}
+              value={login}
+            />
+            <StyledInput
+              label="Password"
+              type="password"
+              onChange={handlePasswordChange}
+              value={password}
+            />
+          </div>
         </main>
       </div>
     </>
