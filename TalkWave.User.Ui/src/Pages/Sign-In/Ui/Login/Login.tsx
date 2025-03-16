@@ -14,15 +14,15 @@ export const LoginPage = () => {
     setPassword(event.target.value); // update password state
   };
   const handle = () => {
-    console.log(`login: ${login} password: ${password}`)
-  }
+    console.log(`login: ${login} password: ${password}`);
+  };
 
   return (
     <>
       <div className={styles.layout}>
         <main className={styles.container}>
+          <h1>Sign In</h1>
           <div className={styles.box}>
-          
             <StyledInput
               label="Login"
               type="input"
@@ -35,14 +35,10 @@ export const LoginPage = () => {
               onChange={handlePasswordChange}
               value={password}
             />
-            <StyledButton
-            onClick={handle}
-            > 
-            <div>Login</div>
+            <StyledButton onClick={handle}>
+              <p>Login</p>
             </StyledButton>
-
           </div>
-
         </main>
       </div>
     </>
