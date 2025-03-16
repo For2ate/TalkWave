@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TalkWave.User.Api", "TalkWave.User.Api\TalkWave.User.Api.csproj", "{BDF31F35-7251-4CF5-AE3C-1FBF84CE8DEC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TalkWave.User.Data", "TalkWave.User.Data\TalkWave.User.Data.csproj", "{F8147E65-B12C-4D29-A6F9-3B53C25DA204}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TalkWave.User.Models", "TalkWave.User.Models\TalkWave.User.Models.csproj", "{DF40E283-7847-43E7-87CB-25C3DD37CAB6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BDF31F35-7251-4CF5-AE3C-1FBF84CE8DEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BDF31F35-7251-4CF5-AE3C-1FBF84CE8DEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BDF31F35-7251-4CF5-AE3C-1FBF84CE8DEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BDF31F35-7251-4CF5-AE3C-1FBF84CE8DEC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8147E65-B12C-4D29-A6F9-3B53C25DA204}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8147E65-B12C-4D29-A6F9-3B53C25DA204}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8147E65-B12C-4D29-A6F9-3B53C25DA204}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8147E65-B12C-4D29-A6F9-3B53C25DA204}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF40E283-7847-43E7-87CB-25C3DD37CAB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF40E283-7847-43E7-87CB-25C3DD37CAB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF40E283-7847-43E7-87CB-25C3DD37CAB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF40E283-7847-43E7-87CB-25C3DD37CAB6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6F9CD6BF-213F-44EF-90CD-7772E9495B46}
+	EndGlobalSection
+EndGlobal
