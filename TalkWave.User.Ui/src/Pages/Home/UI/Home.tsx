@@ -1,9 +1,17 @@
-import React from "react";
+import styles from "./Home.module.css";
+import { SidebarProvider } from "../Contexts";
+import { Sidebar } from "./Sidebar";
+import { Chat } from "./Chat";
 
 export const HomePage = () => {
   return (
-    <div>
-      <div>Hello</div>
+    <div className={styles.layout}>
+      <div className={styles.layoutContainer}>
+        <SidebarProvider>
+          <Sidebar></Sidebar>
+        </SidebarProvider>
+        <Chat></Chat>
+      </div>
     </div>
   );
 };

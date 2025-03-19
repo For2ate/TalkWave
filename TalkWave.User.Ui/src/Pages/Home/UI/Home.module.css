@@ -1,0 +1,22 @@
+.layout {
+    background-color: #292F3F;
+    min-width: 400px;
+    width: 100%;
+	height: 100vh;
+	min-height: 100dvh;
+    margin: 0;
+    padding:0;
+    display: flex;
+
+}
+
+.layoutContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.layoutContainer > * {
+    flex: 1 1 auto;
+}

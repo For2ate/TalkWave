@@ -1,0 +1,32 @@
+.layout {
+    display: flex;
+    flex-direction: column; 
+    height: 100%; 
+    max-width: 300x;
+    margin: 0;
+    padding-top: 10px;
+    border-right: 1px solid #ffffff0e;
+    background-color: transparent; 
+    transition: width 0.3s ease; 
+  }
+  
+  .layout > * {
+    flex: 1 1 auto; 
+  }
+  
+  .openLayout {
+    width: 250px; 
+    height: 100%;
+  }
+  
+  .openHeader {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .closedLayout {
+    width: 75px; 
+  }
