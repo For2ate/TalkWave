@@ -19,8 +19,11 @@
   }
 
   .searchBox {
-    width: 100%;
+    width: 85%;
     margin-top: 10px;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
+  }
+  .searchBox > p {
+    width: 70%;
   }
