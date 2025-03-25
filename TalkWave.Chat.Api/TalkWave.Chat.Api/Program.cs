@@ -1,6 +1,11 @@
+using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
+using TalkWave.Chat.Data.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
+
+string? connectionStringUserDB = builder.Configuration.GetConnectionString("ChatDB");
+builder.Services.AddDbContext<ChatsContext>(options => options.UseNpgsql(connectionStringUserDB));
 
 
 builder.Services.AddControllers();

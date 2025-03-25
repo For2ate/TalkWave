@@ -7,8 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="MappingProfiles\" />
   </ItemGroup>
 
@@ -24,6 +22,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.2" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+    <PackageReference Include="TalkWave.Common" Version="1.0.0" />
   </ItemGroup>
 
 </Project>

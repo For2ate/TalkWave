@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
@@ -20,11 +20,16 @@
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="9.0.2" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
     <PackageReference Include="Scalar.AspNetCore" Version="2.1.1" />
+    <PackageReference Include="TalkWave.Common" Version="1.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controllers\" />
     <Folder Include="Hubs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\TalkWave.Chat.Data\TalkWave.Chat.Data.csproj" />
   </ItemGroup>
 
 </Project>
