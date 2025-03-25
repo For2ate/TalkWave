@@ -24,17 +24,16 @@
     color: #fff;
     margin-bottom: 25px;
 }
-
+.container > p {
+    color: #fff;
+    margin-top: 25px;
+}
 .box {
     display: flex;
     width: 90%;
     flex-direction: column;
     gap:20px;
-    /*height: 40vh;*/
+    height: 50%;
     font-size: 20px;
-}
-.container > p {
-    color: #fff;
-    margin-top: 25px;
 }
 

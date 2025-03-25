@@ -3,6 +3,7 @@ import styles from "./Login.module.css";
 import { StyledButton, StyledInput } from "Shared/Ui";
 import { LoginData } from "Entities/User/SignInModels";
 import { Login } from "Pages/Sign-In/Api/SignIn";
+import { RegisterUrl } from "Shared/Api/Constants";
 
 export const LoginPage = () => {
   const [login, setLogin] = useState("");
@@ -52,6 +53,9 @@ export const LoginPage = () => {
               <p>Login</p>
             </StyledButton>
           </div>
+            <p>
+                <a href={RegisterUrl}> Register </a>
+            </p>
         </main>
       </div>
     </>
