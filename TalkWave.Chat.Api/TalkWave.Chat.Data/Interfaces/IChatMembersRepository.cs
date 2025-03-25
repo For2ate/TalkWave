@@ -2,11 +2,9 @@
 
 namespace TalkWave.Chat.Data.Interfaces {
 
-    public interface IMembersChatRepository {
+    public interface IChatMembersRepository {
 
         Task<IEnumerable<ChatMemberEntity>> GetAllChatsForUserAsync(Guid UserId);
-
-        Task ChangeRoleUserAsync(Guid UserId, Guid ChatId);
 
     }
 
