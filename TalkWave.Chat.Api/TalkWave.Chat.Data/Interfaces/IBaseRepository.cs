@@ -1,4 +1,5 @@
-﻿using TalkWave.Chat.Data.Entities;
+﻿using Microsoft.EntityFrameworkCore.Storage;
+using TalkWave.Chat.Data.Entities;
 
 namespace TalkWave.Chat.Data.Interfaces {
 
@@ -13,6 +14,14 @@ namespace TalkWave.Chat.Data.Interfaces {
         Task UpdateAsync(TEntity entity);
 
         Task RemoveAsync(TEntity entity);
+
+        Task<IDbContextTransaction> BeginTransactionAsync();
+
+        Task UseTransactionAsync(IDbContextTransaction transaction);
+
+        Task CommitTransactionAsync(IDbContextTransaction transaction);
+
+        Task RollbackTransactionAsync(IDbContextTransaction transaction);
 
     }
 

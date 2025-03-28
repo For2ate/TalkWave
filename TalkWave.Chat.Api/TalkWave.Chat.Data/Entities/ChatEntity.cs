@@ -10,7 +10,7 @@
 
         public Guid CreatedBy { get; set; }
         
-        public Guid LastMessageId { get; set; }
+        public Guid? LastMessageId { get; set; }
         public virtual MessageEntity LastMessage { get; set; }
 
         public virtual ICollection<MessageEntity> Messages { get; set; }

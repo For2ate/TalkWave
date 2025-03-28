@@ -25,6 +25,28 @@ namespace TalkWave.Chat.Data.Repositories {
 
         }
 
+        public async Task<IEnumerable<ChatEntity>> GetCommonChatsForUsersAsync(Guid userId1, Guid userId2) {
+
+            try {
+
+                return await _dbSet
+                    .Where(cm => cm.UserId == userId1)
+                    .Join(
+                        _dbSet.Where(cm => cm.UserId == userId2),
+                        cm1 => cm1.ChatId,
+                        cm2 => cm2.ChatId,
+                        (cm1, cm2) => cm1.Chat)
+                    .Where(c => !c.IsGroupChat)
+                    .ToListAsync();
+
+            } catch {
+
+                throw;
+
+            }
+
+        }
+
     }
 
 }

@@ -9,11 +9,20 @@ namespace TalkWave.Chat.Data.Repositories {
 
         public MessagesRepository(ChatsContext context) : base(context) { }
 
-        public async Task<IEnumerable<MessageEntity>> GetNMessagesByChatIdAsync(Guid chatId, int take) {
+        public async Task<IEnumerable<MessageEntity>> GetNMessagesByChatIdAsync(Guid chatId, Guid fromMessageId, int take) {
 
             try {
 
-                return await _dbSet.Where(m => m.ChatId == chatId)
+                var fromMessage = await _dbSet
+                                        .AsNoTracking()
+                                        .FirstOrDefaultAsync(m => m.Id == fromMessageId);
+
+                if (fromMessage == null)
+                    return Enumerable.Empty<MessageEntity>();
+
+                return await _dbSet
+                    .Where(m => m.ChatId == chatId &&
+                               m.SentAt <= fromMessage.SentAt)
                     .OrderByDescending(m => m.SentAt)
                     .Take(take)
                     .AsNoTracking()

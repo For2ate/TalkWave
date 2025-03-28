@@ -1,4 +1,5 @@
-﻿using TalkWave.Common.ChatMember;
+﻿using TalkWave.Chat.Models.ChatMembers;
+using TalkWave.Common.ChatMember;
 
 namespace TalkWave.Chat.Models.Chats.Response {
 
@@ -16,7 +17,9 @@ namespace TalkWave.Chat.Models.Chats.Response {
 
         public ChatMemberRole Role { get; set; }
 
-        public Guid LastMassege { get; set; }
+        public Guid LastMessageId { get; set; }
+
+        public List<ChatMemberModel> ChatMembers { get; set; }
 
     }
 

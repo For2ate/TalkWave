@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using TalkWave.Chat.Data.Entities;
 using TalkWave.Chat.Data.Interfaces;
 
@@ -36,6 +37,22 @@ namespace TalkWave.Chat.Data.Repositories {
         public async Task RemoveAsync(TEntity entity) {
             _dbSet.Remove(entity);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<IDbContextTransaction> BeginTransactionAsync() {
+            return await _context.Database.BeginTransactionAsync();
+        }
+
+        public async Task UseTransactionAsync(IDbContextTransaction transaction) {
+            await _context.Database.UseTransactionAsync(transaction.GetDbTransaction());
+        }
+
+        public async Task CommitTransactionAsync(IDbContextTransaction transaction) {
+            await transaction.CommitAsync();
+        }
+
+        public async Task RollbackTransactionAsync(IDbContextTransaction transaction) {
+            await transaction.RollbackAsync();
         }
 
     }

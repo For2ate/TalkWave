@@ -23,8 +23,7 @@ namespace TalkWave.Chat.Data.Configurations {
             builder.Property(c => c.CreatedBy)
                    .IsRequired();
 
-            builder.Property(c => c.LastMessageId)
-                   .IsRequired(); 
+            builder.Property(c => c.LastMessageId);
 
             builder.HasOne(c => c.LastMessage)
                    .WithOne()

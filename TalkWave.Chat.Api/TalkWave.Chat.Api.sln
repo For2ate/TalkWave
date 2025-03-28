@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TalkWave.Chat.Api", "TalkWa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TalkWave.Chat.Data", "TalkWave.Chat.Data\TalkWave.Chat.Data.csproj", "{0887B4A4-BD3E-42EF-87B9-A0957A2630BC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TalkWave.Chat.Models", "TalkWave.Chat.Models\TalkWave.Chat.Models.csproj", "{DE9B83CF-0E9D-4919-9AF5-6721B008973D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{0887B4A4-BD3E-42EF-87B9-A0957A2630BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0887B4A4-BD3E-42EF-87B9-A0957A2630BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0887B4A4-BD3E-42EF-87B9-A0957A2630BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE9B83CF-0E9D-4919-9AF5-6721B008973D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE9B83CF-0E9D-4919-9AF5-6721B008973D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE9B83CF-0E9D-4919-9AF5-6721B008973D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE9B83CF-0E9D-4919-9AF5-6721B008973D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
