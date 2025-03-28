@@ -9,7 +9,7 @@ namespace TalkWave.Chat.Data.Repositories {
 
         public MessagesRepository(ChatsContext context) : base(context) { }
 
-        public async Task<IEnumerable<MessageEntity>> GetNMessagesByChatIdAsync(Guid chatId, Guid fromMessageId, int take) {
+        public async Task<IEnumerable<MessageEntity>> GetNMessagesFromMessageAsync(Guid chatId, Guid fromMessageId, int take) {
 
             try {
 

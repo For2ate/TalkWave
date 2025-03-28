@@ -25,17 +25,6 @@ namespace TalkWave.Chat.Api.Configurations {
             return services;
         }
 
-        public static IServiceCollection AddApplicationDbContext(this IServiceCollection services, string connectionString) {
-
-            services.AddDbContext<ChatsContext>(options =>
-                options.UseNpgsql(connectionString));
-
-            services.AddScoped<DbContext, ChatsContext>(provider =>
-                provider.GetRequiredService<ChatsContext>());
-
-            return services;
-
-        }
 
         public static IServiceCollection AddApplicationAutoMapper(this IServiceCollection services) {
 

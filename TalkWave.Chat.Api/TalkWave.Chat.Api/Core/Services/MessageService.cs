@@ -36,6 +36,23 @@ namespace TalkWave.Chat.Api.Core.Services {
 
         }
 
+        public async Task<IEnumerable<MessageFullResponseModel>> GetNMessagesFromMessageAsync(GetNMessagesRequestModel model) {
+
+            try {
+
+                var messagesEntity = await _messageRepository.GetNMessagesFromMessageAsync(model.ChatId, model.MessageId, model.Take);
+
+                return _messageMapper.Map<IEnumerable<MessageFullResponseModel>>(messagesEntity);
+
+            } catch (Exception ex) {
+
+                throw new Exception(ex.Message);
+
+            }
+
+
+        }
+
         public async Task<MessageFullResponseModel> CreateMessageAsync(CreateMessageRequestModel model) {
 
             try {
@@ -61,6 +78,7 @@ namespace TalkWave.Chat.Api.Core.Services {
                 var messageEntity = await _messageRepository.GetByIdAsync(model.Id);
 
                 messageEntity.Content = model.Content;
+                messageEntity.Status = model.Status;
 
                 await _messageRepository.UpdateAsync(messageEntity);
 

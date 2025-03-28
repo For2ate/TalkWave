@@ -16,7 +16,8 @@ namespace TalkWave.Chat.Data.Repositories {
         }
 
         public async Task<TEntity> GetByIdAsync(Guid id) {
-            return await _dbSet.FindAsync(id);
+            var entity = await _dbSet.FirstOrDefaultAsync(e => e.Id == id);
+            return entity;
         }
 
         public async Task<IEnumerable<TEntity>> GetAllAsync() {
