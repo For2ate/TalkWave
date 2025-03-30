@@ -4,6 +4,8 @@ namespace TalkWave.Chat.Models.Messages.Response {
 
     public class MessageFullResponseModel {
 
+        public Guid Id { get; set; }
+
         public Guid SenderId { get; set; }
 
         public Guid ChatId { get; set; }

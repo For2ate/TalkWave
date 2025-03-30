@@ -28,10 +28,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Hubs\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\TalkWave.Chat.Data\TalkWave.Chat.Data.csproj" />
     <ProjectReference Include="..\TalkWave.Chat.Models\TalkWave.Chat.Models.csproj" />
   </ItemGroup>

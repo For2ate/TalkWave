@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
 using TalkWave.Chat.Api.Configurations;
+using TalkWave.Chat.Api.Hubs;
 using TalkWave.Chat.Data.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,7 @@ builder.Services.AddDbContext<ChatsContext>(options => options.UseNpgsql(connect
 builder.Services.AddScoped<DbContext, ChatsContext>(provider =>
     provider.GetRequiredService<ChatsContext>());
 
+builder.Services.AddSignalRCore();
 
 builder.Services
     .AddApplicationAutoMapper()
@@ -32,6 +34,8 @@ if (app.Environment.IsDevelopment()) {
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+app.MapHub<ChatHub>("/Chat");
 
 app.MapControllers();
 
