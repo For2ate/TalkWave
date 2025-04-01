@@ -150,6 +150,73 @@ namespace TalkWave.Chat.Tests.UnitTests.Services {
 
         }
 
-    }
 
+        [Fact]
+        public async Task CreateMessageAsync_ValidRequest_ReturnsMappedResponse() {
+
+            // Arrange
+            var requestModel = _fixture.Create<CreateMessageRequestModel>();
+            var messageEntity = _fixture.Build<MessageEntity>()
+                .With(x => x.Content, requestModel.Content)
+                .Create();
+
+            var expectedResponse = _fixture.Build<MessageFullResponseModel>()
+                .With(x => x.Content, requestModel.Content)
+                .Create();
+
+            _mockMapper.Setup(x => x.Map<MessageEntity>(requestModel))
+                     .Returns(messageEntity);
+
+            _mockMapper.Setup(x => x.Map<MessageFullResponseModel>(messageEntity))
+                     .Returns(expectedResponse);
+
+            // Act
+            var result = await _service.CreateMessageAsync(requestModel);
+
+            // Assert
+            result.Should().BeEquivalentTo(expectedResponse);
+            _mockRepository.Verify(x => x.AddAsync(messageEntity), Times.Once);
+
+        }
+
+        [Fact]
+        public async Task CreateMessageAsync_RepositoryThrowsException_PropagatesError() {
+
+            // Arrange
+            var requestModel = _fixture.Create<CreateMessageRequestModel>();
+            var messageEntity = _fixture.Create<MessageEntity>();
+            var exception = _fixture.Create<Exception>();
+
+            _mockMapper.Setup(x => x.Map<MessageEntity>(requestModel))
+                     .Returns(messageEntity);
+
+            _mockRepository.Setup(x => x.AddAsync(messageEntity))
+                         .ThrowsAsync(exception);
+
+            // Act & Assert
+            var ex = await Assert.ThrowsAsync<Exception>(() => _service.CreateMessageAsync(requestModel));
+            ex.Message.Should().Be(exception.Message);
+
+        }
+
+        [Fact]
+        public async Task CreateMessageAsync_MapperThrowsOnMapToEntity_PropagatesError() {
+
+            // Arrange
+            var requestModel = _fixture.Create<CreateMessageRequestModel>();
+            var exception = _fixture.Create<Exception>();
+
+            _mockMapper.Setup(x => x.Map<MessageEntity>(requestModel))
+                     .Throws(exception);
+
+            // Act & Assert
+            var ex = await Assert.ThrowsAsync<Exception>(() => _service.CreateMessageAsync(requestModel));
+            ex.Message.Should().Be(exception.Message);
+
+        }
+
+
+
+    }
+    
 }
