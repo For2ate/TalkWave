@@ -3,10 +3,27 @@
     height: 100%;
   }
   
-  .openHeader {
+  .header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .topHeader {
     width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+  }
+
+  .searchBox {
+    width: 85%;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-around;
+  }
+  .searchBox > p {
+    width: 70%;
   }

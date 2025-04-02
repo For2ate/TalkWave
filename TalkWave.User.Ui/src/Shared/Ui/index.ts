@@ -5,3 +5,4 @@ export {Icon} from './Icons';
 export {IconButton} from './IconButton'
 export {CloseSidebarIcon} from './Icons'
 export {OpenSidebarIcon} from './Icons'
+export {SearchIcon} from './Icons';

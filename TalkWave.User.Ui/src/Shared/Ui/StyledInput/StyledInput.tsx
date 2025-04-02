@@ -11,8 +11,8 @@ export const StyledInput = (props: Props) => {
   const { label, value, onChange, ...rest } = props;
 
   return (
-    <div>
-      <label className={styles.label}>{label}</label>
+    <div className={styles.layout}>
+      {label && <label className={styles.label}>{label}</label>}
       <input
         type={rest.type || "text"}
         value={value}

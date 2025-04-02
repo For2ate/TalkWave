@@ -4,6 +4,13 @@
     margin-bottom: 8px;
     color: #ffffff;
   }
+
+  .layout{
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+  }
   
   .input {
     width: 100%;

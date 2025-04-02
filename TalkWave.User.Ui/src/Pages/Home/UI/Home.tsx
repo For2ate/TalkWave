@@ -1,7 +1,7 @@
 import styles from "./Home.module.css";
 import { SidebarProvider } from "../Contexts";
 import { Sidebar } from "./Sidebar";
-import { Chat } from "./Chat";
+import { Chat } from "./Chats/Chat";
 
 export const HomePage = () => {
   return (

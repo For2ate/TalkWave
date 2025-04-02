@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TalkWave.Chat.Api", "TalkWave.Chat.Api\TalkWave.Chat.Api.csproj", "{D9C0D477-95F7-49C9-816F-1459B69CDD80}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TalkWave.Chat.Data", "TalkWave.Chat.Data\TalkWave.Chat.Data.csproj", "{0887B4A4-BD3E-42EF-87B9-A0957A2630BC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TalkWave.Chat.Models", "TalkWave.Chat.Models\TalkWave.Chat.Models.csproj", "{DE9B83CF-0E9D-4919-9AF5-6721B008973D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TalkWave.Chat.Tests", "TalkWave.Chat.Tests\TalkWave.Chat.Tests.csproj", "{FFB40C31-2579-47AC-B465-FC7FF515E78D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D9C0D477-95F7-49C9-816F-1459B69CDD80}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9C0D477-95F7-49C9-816F-1459B69CDD80}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9C0D477-95F7-49C9-816F-1459B69CDD80}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9C0D477-95F7-49C9-816F-1459B69CDD80}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0887B4A4-BD3E-42EF-87B9-A0957A2630BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0887B4A4-BD3E-42EF-87B9-A0957A2630BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0887B4A4-BD3E-42EF-87B9-A0957A2630BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0887B4A4-BD3E-42EF-87B9-A0957A2630BC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE9B83CF-0E9D-4919-9AF5-6721B008973D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE9B83CF-0E9D-4919-9AF5-6721B008973D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE9B83CF-0E9D-4919-9AF5-6721B008973D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE9B83CF-0E9D-4919-9AF5-6721B008973D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFB40C31-2579-47AC-B465-FC7FF515E78D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFB40C31-2579-47AC-B465-FC7FF515E78D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFB40C31-2579-47AC-B465-FC7FF515E78D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFB40C31-2579-47AC-B465-FC7FF515E78D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A1AA4CCF-2859-4106-BB0A-8ECA111E22D2}
+	EndGlobalSection
+EndGlobal
