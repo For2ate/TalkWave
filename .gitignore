@@ -179,3 +179,9 @@ dist/
 .vscode/*
 !.vscode/extensions.json
 .idea
+
+
+#Logs
+logs/
+logs/all-*
+*.log

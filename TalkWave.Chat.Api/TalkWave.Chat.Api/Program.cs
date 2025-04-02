@@ -1,10 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using Scalar.AspNetCore;
+using Serilog;
 using TalkWave.Chat.Api.Configurations;
+using TalkWave.Chat.Api.Extensions;
 using TalkWave.Chat.Api.Hubs;
 using TalkWave.Chat.Data.Contexts;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.ConfigureSerilog();
 
 string? connectionStringUserDB = builder.Configuration.GetConnectionString("ChatDB");
 builder.Services.AddDbContext<ChatsContext>(options => options.UseNpgsql(connectionStringUserDB));
@@ -22,6 +26,8 @@ builder.Services.AddControllers();
 
 builder.Services.AddOpenApi();
 
+builder.Services.AddSignalR();
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment()) {
@@ -30,6 +36,8 @@ if (app.Environment.IsDevelopment()) {
     app.MapScalarApiReference();
 
 }
+
+app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 

@@ -18,24 +18,31 @@ namespace TalkWave.Chat.Api.Core.Services {
 
         private readonly IMapper chatMapper;
 
+        private readonly ILogger<ChatService> _logger;
+
         public ChatService(IChatsRepository chatsRepository, IBaseRepository<UserEntity> usersRepository,
             IMessagesRepository messagesRepository, IChatMembersRepository membersChatRepository,
-            IMapper chatMapper
+            IMapper chatMapper, ILogger<ChatService> logger
             ) {
             this.chatsRepository = chatsRepository;
             this.usersRepository = usersRepository;
             this.messagesRepository = messagesRepository;
             this.chatMembersRepository = membersChatRepository;
             this.chatMapper = chatMapper;
+            this._logger = logger;
         }
 
         public async Task<IEnumerable<ChatFullResponseModel>> GetChatsForUserAsync(Guid userId) {
+
+            _logger.LogInformation("Getting chat for user {userId}", userId);
 
             try {
 
                 var chatsId = await chatMembersRepository.GetAllChatsForUserAsync(userId);
 
                 var chats = new List<ChatFullResponseModel>();
+
+                _logger.LogDebug("Found {count} chats", chatsId.Count());
 
                 foreach (var chatMember in chatsId) {
 
@@ -49,12 +56,14 @@ namespace TalkWave.Chat.Api.Core.Services {
 
                 }
 
+                _logger.LogInformation("Returned {count} chats", chats.Count());
+
                 return chats;
 
 
             } catch (Exception ex) {
 
-                Console.WriteLine("Service error\n\n\n" + ex.Message);
+                _logger.LogError(ex, "Error catching chats for {userId}", userId);
 
                 throw;
 
