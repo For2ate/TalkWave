@@ -34,6 +34,25 @@ namespace TalkWave.Chat.Api.Configurations {
 
         }
 
+        public static IServiceCollection AddApplicationRedis(this IServiceCollection services) {
+
+            var serviceProvider = services.BuildServiceProvider();
+            var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+
+            var redisConfig = configuration.GetSection("Redis");
+
+            services.AddStackExchangeRedisCache(options =>
+            {
+                options.Configuration = redisConfig["ConnectionString"];
+                options.InstanceName = redisConfig["InstanceName"];
+            });
+
+
+
+            return services;
+
+        }
+
     }
 
 }

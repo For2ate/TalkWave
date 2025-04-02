@@ -20,7 +20,8 @@ builder.Services.AddSignalRCore();
 
 builder.Services
     .AddApplicationAutoMapper()
-    .AddApplicationServices();
+    .AddApplicationServices()
+    .AddApplicationRedis();
 
 builder.Services.AddControllers();
 
