@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using TalkWave.Chat.Api.Core.Interfaces;
 using TalkWave.Chat.Models.ChatHub.Request;
+using TalkWave.Chat.Models.Messages.Request;
 
 namespace TalkWave.Chat.Api.Hubs {
     
@@ -39,12 +40,45 @@ namespace TalkWave.Chat.Api.Hubs {
 
             } catch (Exception ex) {
 
-                _logger.LogError(ex, $"Error joining chat {joinModel?.ChatId} by user {joinModel?.UserId}");
+                _logger.LogError(ex, "Error joining chat {joinModel?.ChatId} by user {joinModel?.UserId}", joinModel?.ChatId, joinModel?.UserId);
 
                 throw new HubException($"Join chat failed: {ex.Message}", ex);
 
             }
 
+        }
+
+        public async Task SendMessage(CreateMessageRequestModel messageModel) {
+
+            try {
+
+                if (messageModel == null)
+                    throw new ArgumentNullException(nameof(messageModel));
+
+                if (string.IsNullOrWhiteSpace(messageModel.Content))
+                    throw new ArgumentException("Message content cannot be empty");
+
+                var messageResponse = await _messageService.CreateMessageAsync(messageModel);
+
+                await Clients.Group(messageModel.ChatId.ToString()).SendAsync("ReceiveMessage", messageResponse);
+
+                _logger.LogInformation($"Message {messageResponse.Id} sent to chat {messageModel.ChatId} by {messageModel.SenderId}");
+
+            } catch(Exception ex) {
+
+                _logger.LogError(ex, $"Error sending message to chat {messageModel?.ChatId} by user {messageModel?.SenderId}");
+
+                throw new HubException($"Failed to send message: {ex.Message}", ex);
+
+            }
+
+        }
+
+
+        public override Task OnConnectedAsync() {
+
+            return base.OnConnectedAsync();
+        
         }
 
     }
