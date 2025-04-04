@@ -1,7 +1,7 @@
 import styles from "./Home.module.css";
-import { SidebarProvider } from "../Contexts";
-import { Sidebar } from "./Sidebar";
-import { Chat } from "./Chats/Chat";
+import { Outlet } from "react-router-dom";
+import { SidebarProvider } from "App/Providers";
+import { Sidebar } from "Widgets";
 
 export const HomePage = () => {
   return (
@@ -10,7 +10,7 @@ export const HomePage = () => {
         <SidebarProvider>
           <Sidebar></Sidebar>
         </SidebarProvider>
-        <Chat></Chat>
+        <Outlet />
       </div>
     </div>
   );

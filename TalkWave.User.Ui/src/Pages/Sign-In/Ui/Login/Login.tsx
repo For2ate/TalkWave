@@ -4,10 +4,13 @@ import { StyledButton, StyledInput } from "Shared/Ui";
 import { LoginData } from "Entities/User/SignInModels";
 import { Login } from "Pages/Sign-In/Api/SignIn";
 import { RegisterUrl } from "Shared/Api/Constants";
+import { useNavigate } from "react-router-dom";
 
 export const LoginPage = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigate = useNavigate();
 
   const handleLoginChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLogin(event.target.value); // update login state
@@ -22,9 +25,10 @@ export const LoginPage = () => {
     const result = await Login(data);
     if (result) {
       localStorage[`userId`] = result.id;
-      localStorage[`userFirstName`] = result.firstname;
-      localStorage[`userLastName`] = result.lastname;
+      localStorage[`userFirstName`] = result.firstName;
+      localStorage[`userLastName`] = result.lastName;
       localStorage[`userEmail`] = result.email;
+      navigate("/");
     } else {
       // login error
       console.error("Login failed:", result);
@@ -53,9 +57,9 @@ export const LoginPage = () => {
               <p>Login</p>
             </StyledButton>
           </div>
-            <p>
-                <a href={RegisterUrl}> Register </a>
-            </p>
+          <p>
+            <a href={RegisterUrl}> Register </a>
+          </p>
         </main>
       </div>
     </>

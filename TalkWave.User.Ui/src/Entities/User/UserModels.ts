@@ -2,6 +2,6 @@ export interface UserFullResponse {
     id: string;
     login: string;
     email: string;
-    firstname: string;
-    lastname: string;
+    firstName: string;
+    lastName: string;
 }

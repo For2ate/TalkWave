@@ -1,1 +1,0 @@
-export {useSidebarContext, SidebarProvider} from './SidebarContext'

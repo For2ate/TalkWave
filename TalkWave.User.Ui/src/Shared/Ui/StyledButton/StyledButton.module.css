@@ -9,10 +9,19 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     font-family: inherit;
     font-size: inherit;
+    transition: background-color 0.2s ease;
     color: #fff;
   }
   
   .button:focus {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
-  
+
+  .button:hover {
+    background-color: #374a5e; 
+  }
+  .button:active {
+    background-color: #2d3d4f; 
+    transform: translateY(1px); 
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); 
+}
