@@ -29,6 +29,15 @@ builder.Services.AddOpenApi();
 
 builder.Services.AddSignalR();
 
+builder.Services.AddCors(options => {
+    options.AddPolicy("UIPolicy",
+        builder => {
+            builder.WithOrigins("http://localhost:3000")
+                   .AllowAnyHeader()
+                   .AllowAnyMethod();
+        });
+});
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment()) {
@@ -37,6 +46,8 @@ if (app.Environment.IsDevelopment()) {
     app.MapScalarApiReference();
 
 }
+
+app.UseCors("UIPolicy");
 
 app.UseSerilogRequestLogging();
 
