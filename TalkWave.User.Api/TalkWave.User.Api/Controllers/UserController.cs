@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper.Configuration.Annotations;
+using Microsoft.AspNetCore.Mvc;
 using TalkWave.User.Api.Core.Interfaces;
 
 namespace Taskly.User.Api.Controllers {
@@ -13,6 +14,23 @@ namespace Taskly.User.Api.Controllers {
 
             _userService = userService;
         
+        }
+
+        [HttpGet("{id}")] 
+        public async Task<IActionResult> GetUserByIdAsync(Guid id) {
+
+            try {
+
+                var user = await _userService.GetUserByIdAsync(id);
+
+                return Ok(user);
+
+            } catch (Exception ex) {
+
+                return BadRequest(ex.Message);
+
+            }
+
         }
 
         [HttpGet("GetUsers")]
