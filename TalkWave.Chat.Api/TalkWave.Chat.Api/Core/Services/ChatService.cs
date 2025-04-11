@@ -71,6 +71,23 @@ namespace TalkWave.Chat.Api.Core.Services {
 
         }
 
+        public async Task<IEnumerable<Guid>> GetChatsIdsForUserAsync(Guid userId) {
+
+            try {
+
+                var chatsId = await chatMembersRepository.GetAllChatsForUserAsync(userId);
+
+                return chatsId.Select(chat => chat.ChatId);
+
+            } catch (Exception ex) {
+
+
+                throw new Exception(ex.Message);
+
+            }
+
+        }
+
         public async Task<ChatFullResponseModel> CreatePersonalChatAsync(CreatePersonalChatModel createModel) {
  
             using var transaction = await chatsRepository.BeginTransactionAsync();

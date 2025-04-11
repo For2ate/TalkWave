@@ -34,7 +34,8 @@ builder.Services.AddCors(options => {
         builder => {
             builder.WithOrigins("http://localhost:3000")
                    .AllowAnyHeader()
-                   .AllowAnyMethod();
+                   .AllowAnyMethod()
+                   .AllowCredentials();
         });
 });
 
@@ -55,7 +56,7 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapHub<ChatHub>("/Chat");
+app.MapHub<ChatHub>("/ChatHub");
 
 app.MapControllers();
 

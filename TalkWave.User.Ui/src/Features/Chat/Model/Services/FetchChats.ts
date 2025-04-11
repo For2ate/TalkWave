@@ -8,7 +8,8 @@ export const fetchChats = createAsyncThunk<
   Chat[], // Return type
   void, // Argument type
   { rejectValue: string }
->("chats/fetchChats", async (_, { rejectWithValue }) => {
+>("chats/fetchChats", 
+  async (_, { rejectWithValue }) => {
   try {
 
     const userId = localStorage.getItem("userId");

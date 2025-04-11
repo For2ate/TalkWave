@@ -8,16 +8,42 @@ namespace TalkWave.Chat.Api.Hubs {
     public class ChatHub : Hub {
         
         private readonly IMessageService _messageService;
+        private readonly IChatService _chatService;
         private readonly ILogger<ChatHub> _logger;
 
-        public ChatHub(IMessageService messageService, ILogger<ChatHub> logger) {
+        public ChatHub(IMessageService messageService, IChatService chatService, ILogger<ChatHub> logger) {
 
+            _chatService = chatService;
             _messageService = messageService;
             _logger = logger;
 
         }
 
         private string GetUserId() => Context.UserIdentifier!;
+
+        public async Task JoinHub(Guid userId) {
+
+            try {
+
+                var userChats = await _chatService.GetChatsIdsForUserAsync(userId);
+
+                foreach (var chatId in userChats) {
+
+                    await Groups.AddToGroupAsync(Context.ConnectionId, chatId.ToString());
+
+                }
+
+                _logger.LogInformation($"User {userId} connected to hub");
+
+            } catch(Exception ex) {
+
+                _logger.LogError(ex, $"Error when {userId} connecting to hub");
+
+                throw new Exception(ex.Message);
+
+            }
+
+        }
 
         public async Task JoinChat(JoinChatRequestModel joinModel) {
 
@@ -75,11 +101,7 @@ namespace TalkWave.Chat.Api.Hubs {
         }
 
 
-        public override Task OnConnectedAsync() {
 
-            return base.OnConnectedAsync();
-        
-        }
 
     }
 
