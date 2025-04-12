@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, KeyboardEvent } from "react";
 import styles from "./InputBox.module.css";
 
 interface InputBoxProps {
@@ -11,12 +11,23 @@ export const InputBox = ({ onSend }: InputBoxProps) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    sendMessage();
+  };
+
+  const sendMessage = () => {
     if (message.trim()) {
       onSend(message);
       setMessage("");
       if (textareaRef.current) {
         textareaRef.current.style.height = "auto";
       }
+    }
+  };
+
+  const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
     }
   };
 
@@ -49,6 +60,7 @@ export const InputBox = ({ onSend }: InputBoxProps) => {
               ref={textareaRef}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
+              onKeyDown={handleKeyDown}
               placeholder="Type a message..."
               className={styles.inputField}
               rows={1}

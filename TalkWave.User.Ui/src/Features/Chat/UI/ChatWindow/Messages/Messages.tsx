@@ -15,50 +15,56 @@ interface Props {
 }
 
 export const Messages = ({ chatId }: Props) => {
+  const [itFirstRender, setItFirstRender] = useState(true);
   const messages = useAppSelector(selectMessagesByChatId(chatId));
   const dispatch = useAppDispatch();
   const chat = useAppSelector(selectChatById(chatId));
   const currentUserId = localStorage["userId"];
-
   const messagesEndRef = useRef<HTMLDivElement>(null);
-
   const hub = useChatHub();
+  const [hasMore, setHasMore] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    scrollToBottom();
+    if (itFirstRender && messages && messages.length) {
+      scrollToBottom();
+      setItFirstRender(false);
+    }
   }, [messages]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "auto" });
   };
 
-  const loadMessages = async (messageId: string) => {
-    dispatch(
+  const loadMessages = async (messageId: string, excludeLast: boolean) => {
+    const result = await dispatch(
       fetchMessages({
         chatId: chatId,
         messageId: messageId,
         take: 20,
+        excludeLast: excludeLast,
       })
-    );
+    ).unwrap();
+    return result;
   };
 
   useEffect(() => {
     if (chatId && chat?.lastMessage) {
-      loadMessages(chat.lastMessage.id);
+      loadMessages(chat.lastMessage.id, false);
     }
   }, [chat?.lastMessage?.id]);
 
   useEffect(() => {
     const RecieveMessage = async (message: MessageModel) => {
-      dispatch(addNewMessage(message));
+      await dispatch(addNewMessage(message));
+      if (message.senderId === currentUserId) {
+        scrollToBottom();
+      }
     };
 
     hub?.on("ReceiveMessage", RecieveMessage);
   }, [hub]);
-
-  const [hasMore, setHasMore] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-  const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   const loadMoreMessages = useCallback(async () => {
     if (isLoading || !hasMore || !messages || messages.length === 0) return;
@@ -67,15 +73,9 @@ export const Messages = ({ chatId }: Props) => {
     setIsLoading(true);
 
     try {
-      const result = await dispatch(
-        fetchMessages({
-          chatId: chatId,
-          messageId: firstMessageId,
-          take: 20,
-        })
-      ).unwrap();
+      const result = await loadMessages(firstMessageId, true);
 
-      if (!result || result.messages.length < 20) {
+      if (!result || result.messages.length < 5) {
         setHasMore(false);
       }
     } finally {
@@ -98,7 +98,11 @@ export const Messages = ({ chatId }: Props) => {
   }, [loadMoreMessages, isLoading, hasMore]);
 
   return (
-    <div className={styles.layout} ref={messagesContainerRef}>
+    <div
+      className={styles.layout}
+      ref={messagesContainerRef}
+      onScroll={handleScroll}
+    >
       {messages &&
         messages.map((message) => (
           <Message
