@@ -1,42 +1,27 @@
-import { HubConnection } from "@microsoft/signalr"
-import { ChatHub } from "Features/Lib/SignalR";
-import { useEffect, useState } from "react"
-
+import { useEffect, useState } from 'react';
+import { HubConnection } from '@microsoft/signalr';
+import { ChatApiUrl } from 'Shared/Api/Constants';
+import { chatHubService } from 'Features/Lib/SignalR';
 
 export const useChatHub = () => {
-
     const [connection, setConnection] = useState<HubConnection | null>(null);
 
     useEffect(() => {
-
-        const createConnection = async () => {
-
-            const hub = ChatHub.connect();
-
+        const setupConnection = async () => {
             try {
-                // Проверяем состояние перед запуском
-                if (hub.state === 'Disconnected') {
-                  await hub.start()
-                  setConnection(hub)
-                }
-              } catch (err) {
-                console.error('SignalR Connection Error:', err)
+                const hub = await chatHubService.connect(`${ChatApiUrl}/ChatHub`);
+                setConnection(hub);
+            } catch (error) {
+                console.error('Failed to connect:', error);
             }
+        };
 
-        }
-
-        createConnection();
+        setupConnection();
 
         return () => {
-            if (connection) {
-              connection.stop().catch(err => {
-                console.error('Stop connection error:', err)
-              })
-            }
-        }
-
-    }, []); 
+            // Очистка подписок, но соединение остается активным
+        };
+    }, []);
 
     return connection;
-
-}
+};

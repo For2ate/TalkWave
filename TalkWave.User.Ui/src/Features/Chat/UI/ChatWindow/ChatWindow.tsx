@@ -1,29 +1,26 @@
 import { useParams } from "react-router-dom";
 import styles from "./ChatWindow.module.css";
 import { InputBox } from "./InputBox";
-import { useChatHub } from "Features/Chat/Model/Hooks/UseChatHub";
-import { useEffect } from "react";
 import { useAppDispatch } from "Shared/Lib/hooks";
 import { Messages } from "./Messages/Messages";
+import { useChatHub } from "Features/Chat/Model/Hooks/UseChatHub";
 
 export const ChatWindow = () => {
   const { chatId } = useParams<{ chatId: string }>();
   const dispatch = useAppDispatch();
+
   const hub = useChatHub();
 
-  const RecieveMessage = () => {};
+  const handleSendMessage = async (message: string) => {
+    if (!hub) return;
 
-  useEffect(() => {
-    hub?.on(`ReceiveMessage`, RecieveMessage);
-  }, [hub]);
-
-  const handleSendMessage = (message: string) => {
     const request = {
       senderId: localStorage["userId"],
       chatId: chatId,
       content: message,
     };
-    hub?.invoke(`SendMessage`, request);
+
+    await hub.invoke("SendMessage", request);
   };
 
   return (
