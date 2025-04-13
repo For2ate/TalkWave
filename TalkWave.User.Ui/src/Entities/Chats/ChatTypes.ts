@@ -1,22 +1,22 @@
-import { MessageModel as Message } from "./Message";
+import { MessageModel } from "Entities/Messages/MessageTypes";
 
 export interface ChatMember {
     id: string;
     role: number;
-  }
+}
   
-  export interface Chat {
+export interface Chat {
     id: string;
     name: string;
     isGroupChat: boolean;
     createdAt: string;
     createdBy: string;
     role: number;
-    lastMessage: Message | null;
+    lastMessage: MessageModel | null;
     chatMembers: ChatMember[];
-  }
+}
   
-  export interface ApiChatResponse {
+export interface ApiChatResponse {
     id: string;
     name: string;
     isGroupChat: boolean;
@@ -25,4 +25,4 @@ export interface ChatMember {
     role: number;
     lastMessageId: string | null;
     chatMembers: ChatMember[];
-  }
+}

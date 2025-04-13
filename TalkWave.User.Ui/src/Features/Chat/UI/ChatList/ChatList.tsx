@@ -1,9 +1,8 @@
+import { useAppDispatch, useAppSelector } from "Shared/Lib";
 import { ChatListItem } from "./ChatListItem";
 import styles from "./ChatsList.module.css";
-import { useAppDispatch, useAppSelector } from "Shared/Lib/hooks";
-import { selectAllChats } from "Features/Chat/Model/Selector/ChatSelectors";
 import { useEffect } from "react";
-import { fetchChats } from "Features/Chat/Model/Services/FetchChats";
+import { fetchChats, selectAllChats } from "Features/Chat/Model";
 
 export const ChatList = () => {
   const dispatch = useAppDispatch();
@@ -16,7 +15,7 @@ export const ChatList = () => {
   return (
     <div className={styles.layout}>
       <main>
-        {chats.map((chat) => (
+        {chats?.map((chat) => (
           <ChatListItem key={chat.id} chat={chat} />
         ))}
       </main>

@@ -1,9 +1,8 @@
 import { useParams } from "react-router-dom";
 import styles from "./ChatWindow.module.css";
 import { InputBox } from "./InputBox";
-import { useAppDispatch } from "Shared/Lib/hooks";
+import { useAppDispatch, useChatHub } from "Shared/Lib/Hooks";
 import { Messages } from "./Messages/Messages";
-import { useChatHub } from "Features/Chat/Model/Hooks/UseChatHub";
 
 export const ChatWindow = () => {
   const { chatId } = useParams<{ chatId: string }>();

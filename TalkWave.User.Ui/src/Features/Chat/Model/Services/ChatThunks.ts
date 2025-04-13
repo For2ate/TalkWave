@@ -1,8 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { ChatApiEndpoints } from "../../Api/ChatApiEndpoints";
-import { MessageApiEndpoints } from "../../Api/MessageApiEndpoints";
-import { ApiChatResponse, Chat } from "../Types/Chat";
+import { ApiChatResponse, Chat } from "Entities/Chats/ChatTypes";
+import { MessageApiEndpoints } from "Features/Chat/Api/MessageApiEndpoints";
+import { ChatApiEndpoints } from "Features/Chat/Api/ChatApiEndpoints";
 import { UserApiEndpoints } from "Shared/Api";
+
 
 export const fetchChats = createAsyncThunk<
   Chat[], // Return type
@@ -18,7 +19,7 @@ export const fetchChats = createAsyncThunk<
     const chatsResponse = await ChatApiEndpoints.getChats(userId);
     if (!chatsResponse) throw new Error("No chats received");
 
-    // 2. Для каждого чата получаем последнее сообщение
+    // For all chats get last message
     const chatsWithMessages = await Promise.all(
       chatsResponse.map(async (chat: ApiChatResponse) => {
 

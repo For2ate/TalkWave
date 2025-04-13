@@ -1,29 +1,43 @@
+import { MessagesState } from "Features/Chat/Model/Slices/MessagesSlice";
+import { MessageApiEndpoints } from "Features/Chat/Api/MessageApiEndpoints";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { ChatApiEndpoints } from "Features/Chat/Api/ChatApiEndpoints";
 
-
-export const fetchMessages = createAsyncThunk(
-    'messages/fetch',
-    async (params: { chatId: string; messageId: string; take?: number, excludeLast?: boolean }, { rejectWithValue }) => {
+export const loadMessages = createAsyncThunk(
+    'messages/load',
+    async (params: { 
+      chatId: string; 
+      messageId?: string; 
+      take?: number;
+      direction: 'before' | 'after';
+    }, { getState, rejectWithValue }) => {
       try {
-        const response = await ChatApiEndpoints.getMessagesFromMessage({
-          chatId: params.chatId,
-          messageId: params.messageId,
-          take: params.take || 20
-        });
-
-        let messages = response || [];
-
-        if (params.excludeLast && messages.length > 0 && params.messageId) {
-          messages.pop();
+        const { chatId, messageId, take = 20, direction } = params;
+        const state = getState() as { messages: MessagesState };
+  
+        // Проверка, есть ли еще сообщения для загрузки
+        if (direction === 'before' && state.messages.hasMore[chatId] === false || !messageId) {
+          return { chatId, messages: [], direction, hasMore: false };
         }
 
-        return {
-          chatId: params.chatId,
-          messages
+  
+        const response = await MessageApiEndpoints.getMessagesFromMessage({
+          chatId,
+          messageId,
+          take
+        });
+  
+        const loadedMessages = response || [];
+        const hasMoreMessages = loadedMessages.length >= take;
+  
+        return { 
+          chatId, 
+          messages: loadedMessages,
+          direction,
+          hasMore: hasMoreMessages
         };
+  
       } catch (error) {
-        return rejectWithValue('Failed to load messages');
+        return rejectWithValue(error instanceof Error ? error.message : 'Unknown error');
       }
     }
   );

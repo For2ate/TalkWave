@@ -15,7 +15,7 @@ export const InputBox = ({ onSend }: InputBoxProps) => {
   };
 
   const sendMessage = () => {
-    if (message.trim()) {
+    if (message) {
       onSend(message);
       setMessage("");
       if (textareaRef.current) {

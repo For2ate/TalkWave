@@ -1,4 +1,4 @@
-import { MessageModel } from "Features/Chat/Model/Types/Message";
+import { MessageModel } from "Entities/Messages/MessageTypes";
 import styles from "./Message.module.css";
 
 interface Props {

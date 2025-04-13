@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { HubConnection } from '@microsoft/signalr';
 import { ChatApiUrl } from 'Shared/Api/Constants';
-import { chatHubService } from 'Features/Lib/SignalR';
+import { chatHubService } from 'Shared/Lib/Services/SignalR';
 
 export const useChatHub = () => {
     const [connection, setConnection] = useState<HubConnection | null>(null);

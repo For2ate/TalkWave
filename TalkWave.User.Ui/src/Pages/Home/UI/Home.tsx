@@ -2,10 +2,10 @@ import styles from "./Home.module.css";
 import { Outlet } from "react-router-dom";
 import { SidebarProvider } from "App/Providers";
 import { Sidebar } from "Widgets";
-import { chatHubService } from "Features/Lib/SignalR";
+import { chatHubService } from "Shared/Lib/Services/SignalR";
 import { ChatApiUrl } from "Shared/Api/Constants";
-import { useChatHub } from "Features/Chat/Model/Hooks/UseChatHub";
 import { useEffect } from "react";
+import { useChatHub } from "Shared/Lib";
 
 await chatHubService.connect(`${ChatApiUrl}/ChatHub`);
 

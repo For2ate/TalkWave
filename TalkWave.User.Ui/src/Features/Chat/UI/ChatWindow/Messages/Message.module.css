@@ -21,6 +21,7 @@
   }
 
   .content {
+    white-space: pre-wrap;
     padding-right: 40px;
   }
   
