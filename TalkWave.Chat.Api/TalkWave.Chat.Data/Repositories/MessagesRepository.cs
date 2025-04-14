@@ -25,6 +25,7 @@ namespace TalkWave.Chat.Data.Repositories {
                                m.SentAt <= fromMessage.SentAt)
                     .OrderByDescending(m => m.SentAt)
                     .Take(take)
+                    .Reverse()
                     .AsNoTracking()
                     .ToListAsync();
 

@@ -3,6 +3,7 @@ using TalkWave.Chat.Api.Core.Interfaces;
 using TalkWave.Chat.Data.Entities;
 using TalkWave.Chat.Data.Interfaces;
 using TalkWave.Chat.Data.MappingProfiles;
+using TalkWave.Chat.Data.Repositories;
 using TalkWave.Chat.Models.Messages.Request;
 using TalkWave.Chat.Models.Messages.Response;
 
@@ -11,10 +12,12 @@ namespace TalkWave.Chat.Api.Core.Services {
     public class MessageService : IMessageService {
 
         private readonly IMessagesRepository _messageRepository;
+        private readonly IChatsRepository _chatsRepository;
         private readonly IMapper _messageMapper;
         
-        public MessageService(IMessagesRepository messagesRepository, IMapper messageMapper) {
+        public MessageService(IMessagesRepository messagesRepository, IChatsRepository chatsRepository , IMapper messageMapper) {
 
+            _chatsRepository = chatsRepository;
             _messageMapper = messageMapper;
             _messageRepository = messagesRepository;
 
@@ -63,18 +66,31 @@ namespace TalkWave.Chat.Api.Core.Services {
         }
 
         public async Task<MessageFullResponseModel> CreateMessageAsync(CreateMessageRequestModel model) {
+            
+            using var transaction = await _messageRepository.BeginTransactionAsync();
 
             try {
 
                 var messageEntity = _messageMapper.Map<MessageEntity>(model);
-
                 await _messageRepository.AddAsync(messageEntity);
+
+                var chat = await _chatsRepository.GetByIdAsync(model.ChatId);
+                if (chat == null) {
+                    throw new Exception($"Chat with id {model.ChatId} not found");
+                }
+
+                chat.LastMessageId = messageEntity.Id;
+                chat.LastMessage = messageEntity;
+                await _chatsRepository.UpdateAsync(chat);
+
+                await transaction.CommitAsync();
 
                 return _messageMapper.Map<MessageFullResponseModel>(messageEntity);
 
             } catch (Exception ex) {
 
-                throw new Exception(ex.Message);
+                await transaction.RollbackAsync();
+                throw new Exception("Failed to create message", ex);
 
             }
 

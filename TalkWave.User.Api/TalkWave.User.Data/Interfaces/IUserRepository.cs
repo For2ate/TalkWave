@@ -6,7 +6,7 @@ namespace TalkWave.User.Data.Interfaces {
 
         Task<UserEntity> GetByLoginAsync(string login);
 
-        Task<UserEntity> GetByEmailAsync(string login);
+        Task<UserEntity> GetByEmailAsync(string email);
 
     }
 

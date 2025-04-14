@@ -20,13 +20,24 @@ builder.Services.AddSignalRCore();
 
 builder.Services
     .AddApplicationAutoMapper()
-    .AddApplicationServices();
+    .AddApplicationServices()
+    .AddApplicationRedis();
 
 builder.Services.AddControllers();
 
 builder.Services.AddOpenApi();
 
 builder.Services.AddSignalR();
+
+builder.Services.AddCors(options => {
+    options.AddPolicy("UIPolicy",
+        builder => {
+            builder.WithOrigins("http://localhost:3000")
+                   .AllowAnyHeader()
+                   .AllowAnyMethod()
+                   .AllowCredentials();
+        });
+});
 
 var app = builder.Build();
 
@@ -37,13 +48,15 @@ if (app.Environment.IsDevelopment()) {
 
 }
 
+app.UseCors("UIPolicy");
+
 app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapHub<ChatHub>("/Chat");
+app.MapHub<ChatHub>("/ChatHub");
 
 app.MapControllers();
 

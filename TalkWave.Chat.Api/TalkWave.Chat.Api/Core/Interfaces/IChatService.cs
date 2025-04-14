@@ -7,6 +7,8 @@ namespace TalkWave.Chat.Api.Core.Interfaces {
 
         Task<IEnumerable<ChatFullResponseModel>> GetChatsForUserAsync(Guid id);
 
+        Task<IEnumerable<Guid>> GetChatsIdsForUserAsync(Guid userId);
+
         Task<ChatFullResponseModel> CreatePersonalChatAsync(CreatePersonalChatModel model);
 
     }

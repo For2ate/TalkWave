@@ -6,23 +6,28 @@ import { StyledButton, StyledInput } from "Shared/Ui";
 import { RegisterData } from "Entities/User/SignInModels";
 import { Register } from "Pages/Sign-In/Api/SignIn";
 import { LoginUrl } from "Shared/Api/Constants";
+import { useNavigate } from "react-router-dom";
 
 export const RegisterPage = () => {
   const [firstname, setFirstName] = useState("");
-  const lastname = ""
+  const lastname = "";
   const [login, setLogin] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confpassword, setConfPassword] = useState("");
-  
-  const handleFirstNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+  const navigate = useNavigate();
+
+  const handleFirstNameChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setFirstName(event.target.value); // update first name state
   };
 
   const handleLoginChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLogin(event.target.value); // update login state
   };
-  
+
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value); // update email state
   };
@@ -31,20 +36,21 @@ export const RegisterPage = () => {
     setPassword(event.target.value); // update password state
   };
 
-  const handleConfPasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleConfPasswordChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     setConfPassword(event.target.value); // update confirm password state
   };
 
-  
   const handleRegister = async () => {
-    console.log(`name: ${firstname} login: ${login} email: ${email} password: ${password}`);
-    const data: RegisterData = { login, email, password, firstname, lastname};
+    const data: RegisterData = { login, email, password, firstname, lastname };
     const result = await Register(data);
     if (result.success) {
       localStorage[`userId`] = result.data.id;
       localStorage[`userFirstName`] = result.data.firstname;
       localStorage[`userLastName`] = result.data.lastname;
       localStorage[`userEmail`] = result.data.email;
+      navigate("/");
     } else {
       // Register error
       console.error("Register failed:", result.errors);
@@ -92,11 +98,9 @@ export const RegisterPage = () => {
               <p>Register</p>
             </StyledButton>
           </div>
-          
-            <p>
-                <a href={LoginUrl}> Login </a>
-            </p>
-          
+          <p>
+            <a href={LoginUrl}> Login </a>
+          </p>
         </main>
       </div>
     </>

@@ -1,16 +1,35 @@
 import styles from "./Home.module.css";
-import { SidebarProvider } from "../Contexts";
-import { Sidebar } from "./Sidebar";
-import { Chat } from "./Chats/Chat";
+import { Outlet } from "react-router-dom";
+import { SidebarProvider } from "App/Providers";
+import { Sidebar } from "Widgets";
+import { chatHubService } from "Shared/Lib/Services/SignalR";
+import { ChatApiUrl } from "Shared/Api/Constants";
+import { useEffect } from "react";
+import { useChatHub } from "Shared/Lib";
+
+await chatHubService.connect(`${ChatApiUrl}/ChatHub`);
 
 export const HomePage = () => {
+  const hub = useChatHub();
+
+  useEffect(() => {
+    const joinHub = async () => {
+      const userId = localStorage["userId"];
+      await hub?.invoke("JoinHub", userId);
+    };
+
+    if (hub) {
+      joinHub();
+    }
+  }, [hub]);
+
   return (
     <div className={styles.layout}>
       <div className={styles.layoutContainer}>
         <SidebarProvider>
           <Sidebar></Sidebar>
         </SidebarProvider>
-        <Chat></Chat>
+        <Outlet />
       </div>
     </div>
   );

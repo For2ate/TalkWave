@@ -2,45 +2,52 @@
 using Serilog.Filters;
 using Serilog.Formatting.Compact;
 
-namespace TalkWave.Chat.Api.Extensions {
-    public static class SerilogConfiguration {
-        public static IHostBuilder ConfigureSerilog(this IHostBuilder hostBuilder) {
-            return hostBuilder.UseSerilog((context, services, config) => {
+namespace TalkWave.Chat.Api.Extensions;
 
-                var configuration = context.Configuration;
+public static class SerilogConfiguration {
 
-                // Base configuration
-                config.ReadFrom.Configuration(configuration);
+    public static IHostBuilder ConfigureSerilog(this IHostBuilder hostBuilder) {
+        return hostBuilder.UseSerilog((context, services, config) => {
 
-                // Component logs configuration
-                ConfigureComponentLogs(config, configuration);
+            var configuration = context.Configuration;
 
-            });
-        }
+            // Base configuration
+            config.ReadFrom.Configuration(configuration);
 
-        private static void ConfigureComponentLogs(LoggerConfiguration config, IConfiguration configuration) {
-            var componentLogs = configuration.GetSection("ComponentLogs");
-            var children = componentLogs.GetChildren();
+            // Component logs configuration
+            ConfigureComponentLogs(config, configuration);
 
-            foreach (var component in children) {
-                var ns = component["Namespace"];
-                var path = component["Path"];
-                var formatter = component["formatter"];
-
-                if (!string.IsNullOrEmpty(ns) && !string.IsNullOrEmpty(path)) {
-                    var dir = Path.GetDirectoryName(path);
-                    if (!Directory.Exists(dir)) {
-                        Directory.CreateDirectory(dir);
-                    }
-
-                    config.WriteTo.Logger(lc => lc
-                        .Filter.ByIncludingOnly(Matching.FromSource(ns))
-                        .WriteTo.File(
-                            new CompactJsonFormatter(),
-                            path,
-                            rollingInterval: RollingInterval.Day));
-                }
-            }
-        }
+        });
     }
+
+    private static void ConfigureComponentLogs(LoggerConfiguration config, IConfiguration configuration) {
+
+        var componentLogs = configuration.GetSection("ComponentLogs");
+        var children = componentLogs.GetChildren();
+
+        foreach (var component in children) {
+            var ns = component["Namespace"];
+            var path = component["Path"];
+            var formatter = component["formatter"];
+
+            if (!string.IsNullOrEmpty(ns) && !string.IsNullOrEmpty(path)) {
+                var dir = Path.GetDirectoryName(path);
+                if (!Directory.Exists(dir)) {
+                    Directory.CreateDirectory(dir);
+                }
+
+                config.WriteTo.Logger(lc => lc
+                    .Filter.ByIncludingOnly(Matching.FromSource(ns))
+                    .WriteTo.File(
+                        new CompactJsonFormatter(),
+                        path,
+                        rollingInterval: RollingInterval.Day));
+            }
+
+        }
+
+    }
+
 }
+
+

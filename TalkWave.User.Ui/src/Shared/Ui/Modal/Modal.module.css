@@ -1,0 +1,51 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center; 
+  padding: 20px 0;
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.modal {
+  background: rgba(42, 42, 60, 100);
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  /* Убраны фиксированные max-height и overflow-y */
+  position: relative;
+  /* Автоматическая высота */
+  height: auto;
+  /* Ограничение по минимальной высоте */
+  min-height: 100px;
+}
+
+.title {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.closeButton {
+  position: absolute;
+  color: white;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.content {
+  margin-top: 20px;
+  /* Автоматическая высота содержимого */
+  height: auto;
+}
