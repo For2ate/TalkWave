@@ -22,9 +22,21 @@ export const ChatListItem = ({ chat }: Props) => {
         className={styles.chatButton}
         onClick={handleClick}
       >
-        <h2>{chat.name}</h2>
+        <h2 className={styles.chatName}>{chat.name}</h2>
         {chat.lastMessage && (
-          <p className={styles.lastMessage}>{chat.lastMessage.content}</p>
+          <div className={styles.messageContainer}>
+            <p className={styles.message}>
+              {chat.lastMessage.content.length > 50
+                ? `${chat.lastMessage.content.substring(0, 20)}...`
+                : chat.lastMessage.content}
+            </p>
+            <p className={styles.data}>
+              {new Date(chat.lastMessage.sentAt).toLocaleTimeString([], {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </p>
+          </div>
         )}
       </Link>
     </div>

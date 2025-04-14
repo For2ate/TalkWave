@@ -9,7 +9,7 @@ import {
   updateLastMessage,
 } from "Features/Chat/Model";
 import { Message } from "./Message";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { MessageModel } from "Entities/Messages/MessageTypes";
 import { selectHasMoreByChatId } from "Features/Chat/Model";
 

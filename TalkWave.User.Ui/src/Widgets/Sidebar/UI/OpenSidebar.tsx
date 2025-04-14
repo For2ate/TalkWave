@@ -1,14 +1,10 @@
-import {
-  CloseSidebarIcon,
-  IconButton,
-  SearchIcon,
-  StyledInput,
-} from "Shared/Ui";
+import { CloseSidebarIcon, IconButton } from "Shared/Ui";
 
 import { useSidebar } from "App/Providers";
 
 import styles from "../Styles/OpenSidebar.module.css";
 import { ChatList } from "Features/Chat/UI/ChatList/ChatList";
+import { CreateChatButton, Search } from "Features/Chat/UI/ChatList";
 
 export const OpenSidebar = () => {
   const { toggleSideBar } = useSidebar();
@@ -21,14 +17,8 @@ export const OpenSidebar = () => {
             <CloseSidebarIcon color="white" />
           </IconButton>
         </div>
-        <div className={styles.searchBox}>
-          <p>
-            <StyledInput label="" onChange={() => {}} value="search" />
-          </p>
-          <IconButton size={35}>
-            <SearchIcon color={"white"} />
-          </IconButton>
-        </div>
+        <Search />
+        <CreateChatButton />
       </header>
       <main>
         <ChatList></ChatList>

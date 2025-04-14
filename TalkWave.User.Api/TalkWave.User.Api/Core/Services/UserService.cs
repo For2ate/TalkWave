@@ -55,7 +55,7 @@ namespace TalkWave.User.Api.Core.Services {
 
             try {
 
-                var user = await _useRepository.GetByLoginAsync(email);
+                var user = await _useRepository.GetByEmailAsync(email);
 
                 return _mapper.Map<UserFullResponseModel>(user);
 

@@ -50,6 +50,23 @@ namespace Taskly.User.Api.Controllers {
 
         }
 
+        [HttpGet("GetByEmail")]
+        public async Task<IActionResult> GetUserByEmail([FromQuery] string email) {
+
+            try {
+
+                var user = await _userService.GetUserByEmailAsync(email);
+
+                return Ok(user);
+
+            } catch(Exception ex) {
+
+                return BadRequest(ex.Message);
+
+            }
+
+        }
+
     }
 
 }
