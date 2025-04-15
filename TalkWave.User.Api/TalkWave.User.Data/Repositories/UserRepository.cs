@@ -29,7 +29,9 @@ namespace TalkWave.User.Data.Repositories {
 
             try {
 
-                return await _dbSet.FirstOrDefaultAsync(u => u.Email == email);
+                var res = await _dbSet.FirstOrDefaultAsync(u => u.Email == email);
+
+                return res;
 
             } catch (Exception ex) {
 

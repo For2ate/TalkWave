@@ -4,6 +4,8 @@ namespace TalkWave.User.Api.Core.Interfaces {
 
     public interface IUserService {
 
+        Task<UserFullResponseModel> GetUserByIdAsync(Guid id);
+
         Task<UserFullResponseModel> GetUserByLoginAsync(string login);
 
         Task<UserFullResponseModel> GetUserByEmailAsync(string email);

@@ -1,0 +1,76 @@
+.layout {
+    width: 100%;
+  }
+  
+  .main {
+    width: 100%;
+    padding-bottom: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+  }
+  
+  .inputContainer {
+    width: 50%;
+    display: flex;
+    align-items: flex-end;
+    border-radius: 24px;
+    background-color: #333131;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    padding: 8px 16px;
+    min-height: 50px;
+    max-height: 450px;
+  }
+  
+  .textareaWrapper {
+    flex: 1;
+    max-height: 200px;
+    overflow: hidden;
+    margin-right: 8px;
+  }
+
+  .inputField {
+    width: 100%;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 16px;
+    background: transparent;
+    resize: none;
+    line-height: 1.5;
+    overflow-y: hidden;
+    font-family: inherit;
+    padding: 8px 0;
+  }
+  
+  .inputField:focus {
+    outline: none;
+  }
+  
+  .sendButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    transition: transform 0.2s;
+    flex-shrink: 0;
+    margin-bottom: 4px; /* Небольшая коррекция выравнивания */
+  }
+  
+  .sendButton:hover {
+    transform: scale(1.1);
+  }
+  
+  .sendButton:active {
+    transform: scale(0.95);
+  }
+  
+  .sendIcon {
+    width: 24px;
+    height: 24px;
+  }

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AutoMapper.Configuration.Annotations;
 using TalkWave.User.Api.Core.Interfaces;
 using TalkWave.User.Data.Interfaces;
 using TalkWave.User.Models.UserModels.Response;
@@ -15,6 +16,22 @@ namespace TalkWave.User.Api.Core.Services {
 
             _useRepository = useRepository;
             _mapper = mapper;
+
+        }
+
+        public async Task<UserFullResponseModel> GetUserByIdAsync(Guid id) {
+
+            try {
+
+                var user = await _useRepository.GetByIdAsync(id);
+
+                return _mapper.Map<UserFullResponseModel>(user);
+
+            } catch (Exception ex) {
+
+                throw;
+
+            }
 
         }
 
@@ -38,7 +55,7 @@ namespace TalkWave.User.Api.Core.Services {
 
             try {
 
-                var user = await _useRepository.GetByLoginAsync(email);
+                var user = await _useRepository.GetByEmailAsync(email);
 
                 return _mapper.Map<UserFullResponseModel>(user);
 
