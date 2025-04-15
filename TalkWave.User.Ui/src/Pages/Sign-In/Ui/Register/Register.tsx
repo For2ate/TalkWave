@@ -5,7 +5,6 @@ import styles from "./Register.module.css";
 import { StyledButton, StyledInput } from "Shared/Ui";
 import { RegisterData } from "Entities/User/SignInModels";
 import { Register } from "Pages/Sign-In/Api/SignIn";
-import { LoginUrl } from "Shared/Api/Constants";
 import { useNavigate } from "react-router-dom";
 
 export const RegisterPage = () => {
@@ -99,7 +98,7 @@ export const RegisterPage = () => {
             </StyledButton>
           </div>
           <p>
-            <a href={LoginUrl}> Login </a>
+            <a href="/login"> Login </a>
           </p>
         </main>
       </div>

@@ -5,7 +5,6 @@ import { chatReducer } from "Features/Chat/Model";
 export const store = configureStore({
 
     reducer: {
-
         chats: chatReducer,
         messages: messagesReduser
     }

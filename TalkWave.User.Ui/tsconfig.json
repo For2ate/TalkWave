@@ -21,7 +21,7 @@
 
     "baseUrl": "src",
     "paths": {
-      "Features/": ["Features/*"],
+      "Features/*": ["Features/*"],
       "Pages/*": ["Pages/*"],
 			"Shared/*": ["Shared/*"],
     }
