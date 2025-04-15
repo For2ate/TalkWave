@@ -18,8 +18,6 @@ export const HomePage = () => {
       await hub?.invoke("JoinHub", userId);
     };
 
-    debugger;
-
     if (hub) {
       joinHub();
     }
