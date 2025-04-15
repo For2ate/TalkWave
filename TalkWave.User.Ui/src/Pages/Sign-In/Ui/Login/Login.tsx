@@ -3,7 +3,6 @@ import styles from "./Login.module.css";
 import { StyledButton, StyledInput } from "Shared/Ui";
 import { LoginData } from "Entities/User/SignInModels";
 import { Login } from "Pages/Sign-In/Api/SignIn";
-import { RegisterUrl } from "Shared/Api/Constants";
 import { useNavigate } from "react-router-dom";
 
 export const LoginPage = () => {
@@ -58,7 +57,7 @@ export const LoginPage = () => {
             </StyledButton>
           </div>
           <p>
-            <a href={RegisterUrl}> Register </a>
+            <a href="/register"> Register </a>
           </p>
         </main>
       </div>
