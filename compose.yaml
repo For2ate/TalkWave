@@ -1,0 +1,46 @@
+services:
+  talkwave_chat_api:
+    build:
+      context: ./TalkWave.Chat.Api
+    restart: unless-stopped
+    networks:
+      - talkwave_network
+    depends_on:
+      - database
+    ports:
+      - "8080:80"
+  talkwave_user_api:
+    build:
+      context: ./TalkWave.User.Api
+    restart: unless-stopped
+    networks:
+      - talkwave_network
+    depends_on:
+      - database
+    ports:
+      - "8081:80"
+  talkwave_user_ui:
+    build:
+      context: ./TalkWave.User.Ui
+    restart: unless-stopped
+    init: true
+    networks:
+      - talkwave_network
+    ports:
+      - "3000:3000"
+  database:
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: talkwave
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - talkwave_network
+networks:
+  talkwave_network:
+    driver: bridge
+volumes:
+  db_data:

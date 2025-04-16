@@ -63,11 +63,15 @@ public class ChatsController : ControllerBase {
         try {
             var chat = await _chatService.CreatePersonalChatAsync(model);
 
-            _logger.LogInformation(
-                "Successfully created chat {ChatId} between {User1} and {User2}",
-                chat.Id,
-                model.SenderUserId,
-                model.RecipientUserId);
+            if (chat != null) {
+
+                _logger.LogInformation(
+                    "Successfully created chat {ChatId} between {User1} and {User2}",
+                    chat.Id,
+                    model.SenderUserId,
+                    model.RecipientUserId);
+
+            }
 
             return Ok(chat);
 

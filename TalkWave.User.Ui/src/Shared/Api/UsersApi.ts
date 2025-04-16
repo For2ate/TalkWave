@@ -42,6 +42,24 @@ export const UserApiEndpoints = {
 
         }
 
+    },
+
+    getUserByEmail: async(email: string): Promise<UserFullResponse | null> => {
+
+        try {
+
+            const params = new URLSearchParams();
+
+            params.append('email',email);
+
+            return await UserApi.get<UserFullResponse>(`Api/User/GetByEmail?${params.toString()}`)
+
+        } catch(error) {
+
+            return null;
+
+        }
+
     }
 
 }

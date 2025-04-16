@@ -1,5 +1,4 @@
 import { ApiChatResponse } from "Entities/Chats/ChatTypes";
-import { MessageModel } from "Entities/Messages/MessageTypes";
 import { ChatApi } from "Shared/Api";
 
 export const ChatApiEndpoints = {
@@ -19,5 +18,22 @@ export const ChatApiEndpoints = {
         }
     
     },
+
+    createPersonalChat:async(data:{
+        senderUserId: string,
+        recipientUserId: string,
+        message: string}
+    ) : Promise<ApiChatResponse|null> =>{
+
+        try {
+
+            return await ChatApi.post<ApiChatResponse>(`Api/Chats/Chat/Personal`, data);
+
+        } catch(error) {
+            return null;
+        }
+
+    } 
+
 
 }

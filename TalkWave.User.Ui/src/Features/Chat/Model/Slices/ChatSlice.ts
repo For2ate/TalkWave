@@ -30,6 +30,12 @@ const chatSlice = createSlice({
                 state.chats[chatId].lastMessage = message;
             }
         },
+        addChat: (state, action:PayloadAction<Chat>) => {
+            const chat = action.payload;
+            if (!state.chats[chat.id]) {
+                state.chats[chat.id] = chat;
+            }
+        }
     },
     extraReducers: (builder) => {
         builder.addCase(fetchChats.pending, (state) => {
@@ -48,5 +54,5 @@ const chatSlice = createSlice({
     }
 });
 
-export const {setSelectedChat, updateLastMessage} = chatSlice.actions; 
+export const {setSelectedChat, updateLastMessage, addChat} = chatSlice.actions; 
 export const chatReducer = chatSlice.reducer;

@@ -2,6 +2,7 @@
   "name": "TalkWave.User.Ui",
   "version": "1.0.0",
   "private": true,
+  "homepage": "https://For2ate.github.io/Taskly",
   "type": "module",
   "scripts": {
     "build": "rsbuild build",

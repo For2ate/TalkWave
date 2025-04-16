@@ -100,14 +100,10 @@ namespace TalkWave.Chat.Api.Core.Services {
                 var existingChat = await FindExistingPersonalChatAsync(createModel.SenderUserId, createModel.RecipientUserId);
                 
                 if (existingChat != null) {
-                
+
                     await transaction.CommitAsync();
 
-                    var chatex = chatMapper.Map<ChatFullResponseModel>(existingChat);
-
-                    chatex.Role = Common.ChatMember.ChatMemberRole.Owner;
-
-                    return chatex;
+                    return null;
                 
                 }
 

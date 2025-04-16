@@ -1,0 +1,52 @@
+# General patterns
+.git/
+.gitignore
+*.log
+*.tmp
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Language-specific patterns
+node_modules/
+*.pyc
+*.pyo
+__pycache__/
+*.class
+*.go-cache
+*.test
+*.vsidx
+*.bin
+*.suo
+
+# Build and output directories
+dist/
+build/
+out/
+obj/
+bin/
+
+# Environment and secrets
+.env*
+*.pem
+*.key
+*.crt
+
+# Documentation and temporary files
+docs/
+*.md
+README*
+
+# Project-specific patterns
+Dockerfile*
+docker-compose*
+local/
+
+# Service-specific patterns
+TalkWave.Chat.Api/bin/
+TalkWave.Chat.Api/obj/
+TalkWave.User.Api/bin/
+TalkWave.User.Api/obj/
+TalkWave.User.Ui/dist/
+TalkWave.User.Ui/node_modules/
