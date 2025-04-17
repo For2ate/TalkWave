@@ -1,13 +1,13 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter, createHashRouter } from "react-router";
 import { HomePage } from "Pages/Home";
 import { LoginPage, RegisterPage } from "Pages/Sign-In";
 import { RouterProvider } from "react-router-dom";
 import { ChatWindow } from "Features/Chat/UI/ChatWindow/ChatWindow";
 
-export const router = createBrowserRouter([
+export const router = createHashRouter([
   {
     path: "/",
-    Component: HomePage,
+    element: <HomePage />,
     children: [
       {
         path: "chats/:chatId",
@@ -17,11 +17,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/login",
-    Component: LoginPage,
+    element: <LoginPage />,
   },
   {
     path: "/register",
-    Component: RegisterPage,
+    element: <RegisterPage />,
   },
 ]);
 
